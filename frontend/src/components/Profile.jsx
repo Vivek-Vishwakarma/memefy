@@ -11,7 +11,9 @@ const Profile = () => {
   const [user, setUser] = useState({});
   const getUserData = async () => {
     try {
-      const data = await axios.get(`/users/user/${id}`);
+      const data = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/users/user/${id}`
+      );
       setUser(data.data);
       // console.log(data.data);
     } catch (error) {

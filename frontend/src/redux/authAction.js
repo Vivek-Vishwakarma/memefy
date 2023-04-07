@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const backendURL = "http://localhost:5000";
+const backendURL = import.meta.env.VITE_API_BASE_URL;
 export const userLogin = createAsyncThunk(
   "user/login",
   async ({ email, password }, { rejectWithValue }) => {
@@ -12,7 +12,7 @@ export const userLogin = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `/users/login`,
+        `${backendURL}/users/login`,
         { email, password },
         config
       );
@@ -43,7 +43,7 @@ export const userRegister = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `/users/register`,
+        `${backendURL}/users/register`,
         { email, password, name, image },
         config
       );

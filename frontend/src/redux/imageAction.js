@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const backendURL = "";
+const backendURL = import.meta.env.VITE_API_BASE_URL;
 // First, create the thunk
 export const fetchAllImage = createAsyncThunk(
   "image/fetchAllImage",
   async (page) => {
     try {
-      const response = await axios.get(`/image/?page=${page}`);
+      const response = await axios.get(`${backendURL}/image/?page=${page}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -26,7 +26,7 @@ export const imageSearch = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `/image/search?q=${input}&page=${page}`,
+        `${backendURL}/image/search?q=${input}&page=${page}`,
         config
       );
       console.log(data);
@@ -52,7 +52,10 @@ export const searchTag = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.get(`/image/tag?tagname=${tag}`, config);
+      const { data } = await axios.get(
+        `${backendURL}/image/tag?tagname=${tag}`,
+        config
+      );
       // console.log(data);
       return data;
     } catch (error) {
@@ -79,7 +82,7 @@ export const uploadImg = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `/image/upload`,
+        `${backendURL}/image/upload`,
         { name, tags, imageUrl },
         config
       );
@@ -108,7 +111,7 @@ export const allFilter = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `/image/all?page=${page}&name=${name}&tags=${tags}`,
+        `${backendURL}/image/all?page=${page}&name=${name}&tags=${tags}`,
         config
       );
       // console.log(data);
@@ -135,7 +138,7 @@ export const userImages = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.get(`/image/${userId}`, config);
+      const { data } = await axios.get(`${backendURL}/image/${userId}`, config);
       // console.log(data);
       return data;
     } catch (error) {
