@@ -13,7 +13,7 @@ const Yourimages = ({ userId }) => {
   const { img } = useSelector((state) => state.userImage);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(userImages(userInfo._id));
+    dispatch(userImages(userId || userInfo._id));
   }, []);
 
   return (
